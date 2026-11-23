@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+data/
+inbox/
+# Real ECG exports contain personal health information - never commit them.
+tests/samples/*
+!tests/samples/README.md
+*.pdf

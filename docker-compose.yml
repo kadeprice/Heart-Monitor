@@ -1,0 +1,16 @@
+services:
+  heart-monitor:
+    build: .
+    container_name: heart-monitor
+    restart: unless-stopped
+    ports:
+      - "8085:8000"          # change the left side if 8085 is taken
+    environment:
+      - TZ=America/Chicago   # set to your time zone
+      # Optional: auto-import PDFs saved into the folder mounted at /import below
+      - IMPORT_DIR=/import
+      - IMPORT_INTERVAL_SECONDS=60
+    volumes:
+      - ./data:/data                     # database + copies of imported PDFs (back this up)
+      # Point this at any folder on the server, e.g. a synced Google Drive folder:
+      - ./inbox:/import:ro

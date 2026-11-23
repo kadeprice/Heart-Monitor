@@ -1,0 +1,6 @@
+.git
+data
+inbox
+tests
+**/__pycache__
+*.pdf

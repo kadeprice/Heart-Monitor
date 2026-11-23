@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heart Monitor</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23d6455d' d='M12 21s-7.5-4.6-9.5-9.3C1 8 3.4 4 7.2 4c2 0 3.6 1.1 4.8 2.7C13.2 5.1 14.8 4 16.8 4 20.6 4 23 8 21.5 11.7 19.5 16.4 12 21 12 21z'/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l2-5 3 10 3-8 2 3h6"/></svg>
+      Heart Monitor
+    </div>
+    <nav>
+      <a href="#/" data-nav="overview">Overview</a>
+      <a href="#/recordings" data-nav="recordings">Recordings</a>
+      <a href="#/symptoms" data-nav="symptoms">Symptoms</a>
+      <a href="#/import" data-nav="import">Import</a>
+      <a href="#/report" data-nav="report">Doctor report</a>
+    </nav>
+    <button class="btn primary" id="quick-log">+ Log a symptom now</button>
+  </header>
+
+  <main id="view"></main>
+
+  <footer class="foot">
+    For personal tracking only. Not a medical device and not a diagnosis. Call emergency services for chest pain,
+    fainting, or severe shortness of breath.
+  </footer>
+
+  <dialog id="log-dialog">
+    <form method="dialog" id="log-form" class="stack">
+      <h2>Log a symptom</h2>
+      <p class="muted small">If you can, take a recording on your Kardia or watch <strong>right now</strong>, while you're
+        feeling it. It'll be linked to this entry automatically once imported.</p>
+      <div class="grid2">
+        <label>When<input type="datetime-local" name="occurred_at" required></label>
+        <label>What did you feel?
+          <select name="kind">
+            <option>Palpitations</option><option>Skipped / extra beat</option><option>Racing heart</option>
+            <option>Fluttering</option><option>Pounding</option><option>Dizziness / lightheaded</option>
+            <option>Chest discomfort</option><option>Short of breath</option><option>Other</option>
+          </select>
+        </label>
+        <label>How strong? (1–5)
+          <input type="range" name="severity" min="1" max="5" value="3" oninput="this.nextElementSibling.value=this.value">
+          <output>3</output>
+        </label>
+        <label>Lasted about (minutes)<input type="number" name="duration_min" min="0" step="0.5" placeholder="e.g. 2"></label>
+      </div>
+      <label>What were you doing?<input name="activity" placeholder="e.g. sitting after coffee, climbing stairs, lying in bed"></label>
+      <label>Notes<textarea name="notes" rows="3" placeholder="Anything else: caffeine, alcohol, stress, sleep, exercise…"></textarea></label>
+      <div class="row end">
+        <button class="btn" value="cancel" formnovalidate>Cancel</button>
+        <button class="btn primary" value="save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
